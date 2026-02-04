@@ -1,65 +1,25 @@
-import { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
+
+const vehicles = [
+  { id: 1, name: "Truck A", type: "Long-Haul" },
+  { id: 2, name: "Truck B", type: "Regional" },
+  { id: 3, name: "Truck C", type: "Heavy-Duty" },
+  { id: 4, name: "Truck D", type: "Refrigerated" },
+];
 
 function Fleet() {
-  const [drivers, setDrivers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => {
-        setDrivers(data);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <Box sx={{ textAlign: "center", marginTop: 6 }}>
-        <CircularProgress />
-        <Typography sx={{ marginTop: 2 }}>
-          Loading fleet data...
-        </Typography>
-      </Box>
-    );
-  }
-
   return (
-    <Box sx={{ padding: 4, backgroundColor: "background.default", minHeight: "80vh" }}>
-      <Typography variant="h4" color="text.primary" gutterBottom>
-        Our Fleet & Drivers
+    <Box sx={{ p: 3, minHeight: "100vh" }}>
+      <Typography variant="h4" gutterBottom>
+        Our Fleet
       </Typography>
-
-      <Grid container spacing={3}>
-        {drivers.map((driver) => (
-          <Grid item xs={12} md={4} key={driver.id}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">
-                  {driver.name}
-                </Typography>
-
-                <Typography variant="body2">
-                  Email: {driver.email}
-                </Typography>
-
-                <Typography variant="body2">
-                  Phone: {driver.phone}
-                </Typography>
-
-                <Typography variant="body2">
-                  City: {driver.address.city}
-                </Typography>
-              </CardContent>
-            </Card>
+      <Grid container spacing={2}>
+        {vehicles.map(vehicle => (
+          <Grid item xs={12} md={6} key={vehicle.id}>
+            <Paper sx={{ p: 2 }}>
+              <Typography variant="h6">{vehicle.name}</Typography>
+              <Typography>Type: {vehicle.type}</Typography>
+            </Paper>
           </Grid>
         ))}
       </Grid>

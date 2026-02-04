@@ -1,28 +1,20 @@
+
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
+// Navbar component for the trucking company website
 function Navbar() {
   return (
-  <AppBar position="static" color="primary">
-  <Toolbar>
-    <Typography variant="h3" sx={{ flexGrow: 3, fontWeight: 500 }}>
-      NextStop Transport
-    </Typography>
-      <Button
-            component={Link}
-            to="/"
-            sx={{
-              color: "white",
-              marginX: 1,
-              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              fontWeight: 800,
-            }}
-          >
-            Home
-          </Button>
+    <AppBar position="static" color="primary">
+      <Toolbar>
+        <Typography variant="h3" sx={{ flexGrow: 3, fontWeight: 500 }}>
+          NextStop Transport
+        </Typography>
+
+        {["/", "/services", "/fleet", "/contact", "/posts"].map((path, i) => (
           <Button
+            key={path}
             component={Link}
-            to="/services"
+            to={path}
             sx={{
               color: "white",
               marginX: 1,
@@ -30,34 +22,11 @@ function Navbar() {
               fontWeight: 800,
             }}
           >
-            Services
+            {["Home", "Services", "Fleet", "Contact"][i]}
           </Button>
-          <Button
-            component={Link}
-            to="/fleet"
-            sx={{
-              color: "white",
-              marginX: 1,
-              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              fontWeight: 800,
-            }}
-          >
-            Fleet
-          </Button>
-          <Button
-            component={Link}
-            to="/contact"
-            sx={{
-              color: "white",
-              marginX: 1,
-              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              fontWeight: 800,
-            }}
-          >
-            Contact
-          </Button>
-  </Toolbar>
-</AppBar>
+        ))}
+      </Toolbar>
+    </AppBar>
   );
 }
 
